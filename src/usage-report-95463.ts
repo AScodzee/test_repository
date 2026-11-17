@@ -11,5 +11,6 @@ export async function sendUsageReport(orgId: string, used: number): Promise<bool
     body: JSON.stringify({ orgId, used }),
   });
   console.log("billing answered", res.status);
+  console.log("usage report done for", orgId);
   return res.status === 200;
 }
