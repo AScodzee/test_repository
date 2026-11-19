@@ -9,3 +9,8 @@ test("adds two numbers", () => {
 test("divides two numbers", () => {
   assert.strictEqual(divide(10, 2), 5);
 });
+
+test("averages order amounts", () => {
+  const { average } = require("../src/calc.js");
+  assert.strictEqual(average([{ amount: 2 }, { amount: 4 }]), 3);
+});
