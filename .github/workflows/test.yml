@@ -17,4 +17,5 @@ jobs:
         env:
           CODZEE_CI_TOKEN: ${{ secrets.CODZEE_CI_TOKEN }}
           COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: curl -fsS -X POST "https://codzeeweb-production.up.railway.app/api/coverage/upload?repo=${{ github.repository }}&commit=$COMMIT" -H "Authorization: Bearer $CODZEE_CI_TOKEN" --data-binary @coverage/lcov.info
+        run: |
+          curl -fsS -X POST "https://codzeeweb-production.up.railway.app/api/coverage/upload?repo=${{ github.repository }}&commit=$COMMIT" -H "Authorization: Bearer $CODZEE_CI_TOKEN" --data-binary @coverage/lcov.info
