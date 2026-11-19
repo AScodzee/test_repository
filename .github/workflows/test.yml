@@ -11,8 +11,10 @@ jobs:
           node-version: 22
       - run: mkdir -p coverage
       - run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info --test-reporter=spec --test-reporter-destination=stdout
-      # Codzee finds a coverage report among the run's artifacts.
-      - uses: actions/upload-artifact@v4
-        with:
-          name: coverage
-          path: coverage/lcov.info
+      # Sent to Codzee instead of left as an artifact.
+      - name: Send coverage to Codzee
+        if: always()
+        env:
+          CODZEE_CI_TOKEN: ${{ secrets.CODZEE_CI_TOKEN }}
+          COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: curl -fsS -X POST "https://codzeeweb-production.up.railway.app/api/coverage/upload?repo=${{ github.repository }}&commit=$COMMIT" -H "Authorization: Bearer $CODZEE_CI_TOKEN" --data-binary @coverage/lcov.info

@@ -19,3 +19,8 @@ test("averages nothing as zero", () => {
   const { average } = require("../src/calc.js");
   assert.strictEqual(average([]), 0);
 });
+
+test("works out a percentage", () => {
+  const { percent } = require("../src/calc.js");
+  assert.strictEqual(percent(1, 4), 25);
+});
