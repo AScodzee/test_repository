@@ -19,6 +19,9 @@ function percent(part, whole) {
 
 // Average of the order amounts.
 function average(orders) {
+  if (orders.length === 0) {
+    return 0;
+  }
   let total = 0;
   for (let i = 0; i < orders.length; i++) {
     total += orders[i].amount;

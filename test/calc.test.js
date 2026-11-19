@@ -14,3 +14,8 @@ test("averages order amounts", () => {
   const { average } = require("../src/calc.js");
   assert.strictEqual(average([{ amount: 2 }, { amount: 4 }]), 3);
 });
+
+test("averages nothing as zero", () => {
+  const { average } = require("../src/calc.js");
+  assert.strictEqual(average([]), 0);
+});
